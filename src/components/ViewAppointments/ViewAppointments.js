@@ -111,7 +111,11 @@ function ViewAppointments() {
                       style={{ backgroundColor: "#E1F0F3", boxShadow: "none" }}
                     >
                       <a
-                        href="http://localhost:3000/"
+                        href={
+                          "https://medimeet.herokuapp.com/" +
+                          appointment.URL +
+                          "?doc=true"
+                        }
                         target="new"
                         style={{ textDecoration: "none", color: "black" }}
                       >

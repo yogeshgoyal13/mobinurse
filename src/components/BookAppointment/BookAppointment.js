@@ -37,12 +37,12 @@ function BookAppointment() {
     "16:30 - 17:00": false,
   };
 
-  // appoints data
+  // appointments data
   const [appointmentsData, setAppointmentsData] = useState([]);
 
   useEffect(() => {
     axios.get("/bookappointment").then((res) => {
-      console.log(res.data);
+      //console.log(res.data);
       setAppointmentsData(res.data);
     });
   }, []);
@@ -98,27 +98,28 @@ function BookAppointment() {
     //   }
     // ]
 
-    console.log(enteredDate);
+    //console.log(enteredDate);
     appointmentsData.forEach((doctor) => {
       if (
         doctor.doctorEmail === e.target.value &&
         doctor.appointments[enteredDate]
       ) {
+        let copyTimings = {
+          ...JSON.parse(timings),
+        };
+
         doctor.appointments[enteredDate].forEach((t) => {
-          console.log("inside if");
-          let copyTimings = {
-            ...JSON.parse(timings),
-          };
+          //console.log("inside if");
 
           copyTimings[t.time] = true;
-          console.log(t.time);
+          //console.log(t.time);
 
           setTimings(JSON.stringify(copyTimings));
         });
       }
     });
 
-    console.log(timings);
+    //console.log(timings);
   };
 
   const timeChangeHandler = (e) => {
@@ -128,15 +129,15 @@ function BookAppointment() {
   const formSubmitHandler = (e) => {
     e.preventDefault();
 
-    const appointmentData = {
-      name: enteredName,
-      email: enteredEmail,
-      date: enteredDate,
-      doctor: enteredDoctor,
-      time: enteredTime,
-    };
+    // const appointmentData = {
+    //   name: enteredName,
+    //   email: enteredEmail,
+    //   date: enteredDate,
+    //   doctor: enteredDoctor,
+    //   time: enteredTime,
+    // };
 
-    console.log(appointmentData);
+    //console.log(appointmentData);
 
     axios
       .post("/bookappointment", {
@@ -147,7 +148,7 @@ function BookAppointment() {
         time: enteredTime,
       })
       .then((res) => {
-        console.log(res.data);
+        //console.log(res.data);
       });
 
     setEnteredName("");
